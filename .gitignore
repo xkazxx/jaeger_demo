@@ -1,0 +1,29 @@
+apidoc.zip
+apidoc/
+output/
+vue.zip
+vue/
+# IDE
+**/.idea
+**/*.iml
+**/.settings
+**/.project
+**/.classpath
+
+# dev log
+**/logs/
+
+# build
+**/target
+
+# apollo
+cache-dir
+
+**/openapi3.json
+/*.ipr
+/*.iws
+community-vo/src/main/java
+community-proto/src/main/java
+.ideaDataSources/
+dataSources/
+**/.factorypath
