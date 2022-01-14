@@ -20,7 +20,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class JaegerDemoWebConfigure {
-
   @Bean
   public OpenTelemetry initOpenTelemetry() throws TTransportException {
     JaegerThriftSpanExporter exporter =

@@ -40,7 +40,6 @@ public class TracingFilter implements Filter {
 
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-//    Span span = openTelemetry.getTracer(applicationName).spanBuilder("jaegerdemo").startSpan();
     Span span = getServerSpan(openTelemetry.getTracer(applicationName), (HttpServletRequest)servletRequest);
     try (Scope scope = span.makeCurrent()) {
       filterChain.doFilter(servletRequest, servletResponse);
@@ -72,6 +71,11 @@ public class TracingFilter implements Filter {
       }
     });
 
-    return tracer.spanBuilder("applicationName").setParent(context).setSpanKind(SpanKind.SERVER).setAttribute("http.method", httpServletRequest.getMethod()).startSpan();
+    return tracer.spanBuilder(httpServletRequest.getRequestURL().toString())
+            .setParent(context)
+            .setSpanKind(SpanKind.SERVER)
+            .setAttribute("http.method", httpServletRequest.getMethod())
+            .setAttribute("service.name", applicationName)
+            .startSpan();
   }
 }
